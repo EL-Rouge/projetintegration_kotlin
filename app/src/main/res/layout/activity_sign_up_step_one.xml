@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".SignUpStepOne">
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20px"
+        android:fontFamily="Oswald"
+        android:text="Sign Up"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="21px"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="Oswald"
+        android:textColor="@color/gray"
+        android:textSize="14dp"
+        android:textStyle="normal" />
+
+    <!-- Username -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/NameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="45px"
+            android:hint="Username"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Email -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/EmailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="45px"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="45px"
+            android:hint="Password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Account Type Selection -->
+    <Button
+        android:id="@+id/selectAccountType"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="40px"
+        android:fontFamily="Oswald"
+        android:text="Select Account Type"
+        android:backgroundTint="@color/Aero"
+        android:textColor="@android:color/white" />
+
+    <!-- Display Selected Account Type -->
+    <TextView
+        android:id="@+id/selectedAccountType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10px"
+        android:fontFamily="Oswald"
+        android:text="Selected Account Type: None"
+        android:textColor="@color/gray"
+        android:textSize="16dp" />
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/signupbtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="40px"
+        android:fontFamily="Oswald"
+        android:backgroundTint="@color/Aero"
+        android:gravity="center"
+        android:text="Sign Up" />
+</LinearLayout>
