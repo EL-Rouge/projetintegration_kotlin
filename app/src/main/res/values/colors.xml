@@ -27,5 +27,9 @@
     <color name="whitePure">#FFFFFF</color>
     <color name="gray_background">#FCFBFB</color>
     <color name="blue_sky">#00BCD4</color>
+    <color name="rippleColor">#03FF72</color>
+    <color name="indicatorColor">#03FF72</color>
+    <color name="backgroundColor">#FF5722</color>
+    <color name="mainColor">#FF5722</color>
 
 </resources>

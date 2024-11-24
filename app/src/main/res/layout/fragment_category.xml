@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".bottom_fragment.CategoryFragment">
+
+    <!-- ScrollView for enabling scrolling -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- About Section -->
+            <TextView
+                android:id="@+id/about_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ABOUT"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#6200EA"
+                android:layout_marginTop="16dp" />
+
+            <ImageView
+                android:id="@+id/about_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/about_us"
+                android:scaleType="centerCrop"
+                android:contentDescription="About image"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/about_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="At [Your Company Name], we connect businesses with skilled professionals."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:gravity="center" />
+
+            <!-- Features Section -->
+            <TextView
+                android:id="@+id/features_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FEATURES"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#6200EA"
+                android:layout_marginTop="32dp" />
+
+            <ImageView
+                android:id="@+id/feature_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/feature"
+                android:scaleType="centerCrop"
+                android:contentDescription="About image"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/features_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Looking for the right talent? Our platform connects businesses with skilled freelancers."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:gravity="center" />
+
+            <!-- Problem Section -->
+            <TextView
+                android:id="@+id/problem_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PROBLEM"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#6200EA"
+                android:layout_marginTop="32dp" />
+
+            <ImageView
+                android:id="@+id/problem_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/problem"
+                android:scaleType="centerCrop"
+                android:contentDescription="About image"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/problem_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Our company's solution addresses the core problem by connecting the right talent with projects."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:gravity="center" />
+
+            <!-- Solution Section -->
+            <TextView
+                android:id="@+id/solution_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SOLUTION"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#6200EA"
+                android:layout_marginTop="32dp" />
+
+            <ImageView
+                android:id="@+id/solution_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/solution"
+                android:scaleType="centerCrop"
+                android:contentDescription="About image"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/solution_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Our company's solution addresses the core problem by connecting the right talent with projects."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:gravity="center" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

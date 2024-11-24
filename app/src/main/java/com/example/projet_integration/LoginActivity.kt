@@ -1,7 +1,5 @@
 package com.example.projet_integration
 
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -40,7 +38,13 @@ class LoginActivity : AppCompatActivity() {
             if (validateForm(email, password)) {
                 if (mockApiCall(email, password)) {
                     Snackbar.make(rootLayout, "Login successful!", Snackbar.LENGTH_SHORT).show()
-                    navigateToDashboard()
+
+//                    // Navigate to the desired activity (e.g., DashboardActivity or ListActivity)
+//                    val intent = Intent(this, ListActivity::class.java)
+//                    startActivity(intent)
+
+                    // Optional: Close the current activity so user can't navigate back with the back button
+                    finish()
                 } else {
                     showError("Invalid email or password")
                 }
@@ -48,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
                 showError("Please fill in all fields")
             }
         }
+
 
 
         // Sign-Up Button Click Listener
