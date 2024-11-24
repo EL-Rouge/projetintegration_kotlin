@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/light_gray">
+    <TextView
+
+        android:id="@+id/tvServiceStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Service status: Please upgrade to a paid plan..."
+        android:textColor="@color/whitePure"
+        android:background="@color/Aero"
+        android:padding="8dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tvFreelancerInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:text="Freelancer Information:"
+        android:paddingTop="16dp" />
+
+    <EditText
+        android:id="@+id/etFreelancerInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Freelancer ID ; Freelancer Name"
+        android:background="@drawable/edittext_border" />
+
+    <TextView
+        android:id="@+id/tvServiceDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Service Description:"
+        android:textSize="18sp"
+        android:paddingTop="16dp" />
+
+    <EditText
+        android:id="@+id/etServiceDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter service description"
+        android:background="@drawable/edittext_border"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:minHeight="100dp" />
+
+    <TextView
+        android:id="@+id/tvServicePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Service Price:"
+        android:textSize="18sp"
+        android:paddingTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvPriceValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="$50 per hour (price is negotiable)"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:paddingBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnGoToChat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Go to Chat"
+            android:drawableStart="@drawable/ic_chat"
+            android:backgroundTint="@color/Aero" />
+
+        <Button
+            android:id="@+id/btnCloseDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Close"
+            android:backgroundTint="@color/red" />
+    </LinearLayout>
+</LinearLayout>

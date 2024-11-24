@@ -1,0 +1,97 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/light_gray">
+
+    <!-- Service Status Input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service status:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:paddingBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etServiceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter service status here"
+            android:background="@drawable/edittext_border" />
+    </LinearLayout>
+
+    <!-- Client Information -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Client Information:"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:paddingBottom="4dp" />
+
+    <EditText
+        android:id="@+id/etClientInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Client ID ; Client Name"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Service Description -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Service Description:"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:paddingBottom="4dp" />
+
+    <EditText
+        android:id="@+id/etServiceDescription"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Enter service description"
+        android:background="@drawable/edittext_border"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Service Price -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Service Price:"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:paddingBottom="4dp" />
+
+    <EditText
+        android:id="@+id/etServicePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter service price"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Post Request Button -->
+    <Button
+        android:id="@+id/btnPostRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Request"
+        android:backgroundTint="@color/Aero"
+        android:layout_gravity="center_horizontal"
+        android:padding="12dp"
+        android:textColor="@color/white" />
+
+</LinearLayout>
