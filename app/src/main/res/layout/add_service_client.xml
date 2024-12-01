@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:background="@color/light_gray">
 
-    <!-- Service Status Input -->
+    <!-- Service Status Dropdown -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,15 +22,14 @@
             android:textSize="18sp"
             android:paddingBottom="4dp" />
 
-        <EditText
-            android:id="@+id/etServiceStatus"
+        <Spinner
+            android:id="@+id/spinnerServiceStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter service status here"
             android:background="@drawable/edittext_border" />
     </LinearLayout>
 
-    <!-- Client Information -->
+    <!-- Client Information (Read-Only) -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,9 +42,11 @@
         android:id="@+id/etClientInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Client ID ; Client Name"
+        android:hint="Client ID (Auto-filled)"
         android:background="@drawable/edittext_border"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:focusable="false"
+        android:clickable="false" />
 
     <!-- Service Description -->
     <TextView
@@ -75,6 +76,7 @@
         android:textSize="18sp"
         android:paddingBottom="4dp" />
 
+
     <EditText
         android:id="@+id/etServicePrice"
         android:layout_width="match_parent"
@@ -93,5 +95,16 @@
         android:layout_gravity="center_horizontal"
         android:padding="12dp"
         android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnCloseDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Close"
+        android:backgroundTint="@color/red"
+        android:layout_gravity="center_horizontal"
+        android:padding="12dp"
+        android:textColor="@color/white" />
+
 
 </LinearLayout>

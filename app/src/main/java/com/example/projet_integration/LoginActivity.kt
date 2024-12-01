@@ -39,9 +39,9 @@ class LoginActivity : AppCompatActivity() {
                 if (mockApiCall(email, password)) {
                     Snackbar.make(rootLayout, "Login successful!", Snackbar.LENGTH_SHORT).show()
 
-//                    // Navigate to the desired activity (e.g., DashboardActivity or ListActivity)
-//                    val intent = Intent(this, ListActivity::class.java)
-//                    startActivity(intent)
+                    // Navigate to the desired activity (e.g., DashboardActivity or ListActivity)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
 
                     // Optional: Close the current activity so user can't navigate back with the back button
                     finish()

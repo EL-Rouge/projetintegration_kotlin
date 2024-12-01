@@ -1,15 +1,18 @@
 package com.example.projet_integration
 
-import android.os.Bundle
 import android.content.Intent
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.os.Bundle
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projet_integration.R
+import com.example.projet_integration.models.User
+import com.example.projet_integration.network.RetrofitInstance
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignUpStepOne : AppCompatActivity() {
 
@@ -49,11 +52,7 @@ class SignUpStepOne : AppCompatActivity() {
         // Handle Sign Up Button
         signupbtn.setOnClickListener {
             if (validateInputs()) {
-                Snackbar.make(
-                    findViewById(R.id.root),
-                    "Account Created: $accountType",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                createUser()
             }
         }
     }
@@ -124,6 +123,37 @@ class SignUpStepOne : AppCompatActivity() {
             true
         }
     }
+
+    private fun createUser() {
+        val user = User(
+            username = Name.text.toString(),
+            email = Email.text.toString(),
+            password = Password.text.toString(),
+            id = 0, // ID will be generated on the server or in the mock
+            accounttype = accountType ?: "regular"
+        )
+
+        // Call the mock API
+        RetrofitInstance.apiService.createUser(user).enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    Snackbar.make(
+                        findViewById(R.id.root),
+                        "Account Created: ${response.body()?.username}",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    // Navigate to LoginActivity
+                    val intent = Intent(this@SignUpStepOne, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish() // Optionally close SignUpStepOne to prevent going back to it
+                } else {
+                    Snackbar.make(findViewById(R.id.root), "Failed to create account", Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Snackbar.make(findViewById(R.id.root), "Error: ${t.message}", Snackbar.LENGTH_LONG).show()
+            }
+        })
+    }
 }
-
-
