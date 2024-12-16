@@ -28,7 +28,6 @@ class HistoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
@@ -43,7 +42,13 @@ class HistoryFragment : Fragment() {
 
             // Get the client ID
             val clientId = getClientId(requireContext())  // Get the stored clientId
+            val userType = getUserType(requireContext())  // Get the user type (freelancer or client)
             Log.d("HistoryFragment", "Retrieved Client ID: $clientId")
+
+            // Show contact button only for freelancers
+            if (userType == "freelancer") {
+                // Make sure the contact button is displayed here (you can add logic to your adapter if needed)
+            }
 
             if (clientId != null) {
                 // Fetch services using the client ID
@@ -57,12 +62,6 @@ class HistoryFragment : Fragment() {
             Toast.makeText(requireContext(), "An error occurred while initializing the view.", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
-
-
-
 
     // Fetch services using Retrofit
     private fun fetchServices(clientId: String) {
@@ -115,9 +114,15 @@ class HistoryFragment : Fragment() {
         })
     }
 
-        // Retrieve Client ID from SharedPreferences
-        fun getClientId(context: Context): String? {
-            val sharedPref = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-            return sharedPref.getString("CLIENT_ID", null) // Retrieve the clientId
-        }
+    // Retrieve Client ID from SharedPreferences
+    private fun getClientId(context: Context): String? {
+        val sharedPref = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        return sharedPref.getString("CLIENT_ID", null) // Retrieve the clientId
+    }
+
+    // Retrieve User Type from SharedPreferences (e.g., "client" or "freelancer")
+    private fun getUserType(context: Context): String? {
+        val sharedPref = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        return sharedPref.getString("USER_TYPE", null) // Retrieve the user type
+    }
 }
