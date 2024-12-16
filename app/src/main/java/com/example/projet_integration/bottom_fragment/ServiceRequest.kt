@@ -59,6 +59,8 @@ class ServiceRequest : Fragment() {
                         serviceRequestAdapter.notifyDataSetChanged()
                     }
                 } else {
+                    Log.d("ServiceRequest", "Response: ${response.body()}")
+    
                     Log.e("ServiceRequest", "Error: ${response.errorBody()?.string()}")
                     Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
                 }

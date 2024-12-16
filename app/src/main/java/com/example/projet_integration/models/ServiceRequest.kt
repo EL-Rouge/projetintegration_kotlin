@@ -5,8 +5,8 @@ data class ServiceRequest(
     val paymentStatus: String = "Unpaid",  // Default value for paymentStatus
     val createdAt: String = "",
     val updatedAt: String = "",
-    val freelancerId: Int? = null,  // Optional
-    val clientId: Int
+    val clientId: String?, // Nullable because it might be null
+    val freelancerId: String?=null
 )
 
 

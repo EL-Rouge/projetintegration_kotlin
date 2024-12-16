@@ -2,31 +2,32 @@ package com.example.projet_integration
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.projet_integration.R
 import com.example.projet_integration.models.User
 import com.example.projet_integration.network.RetrofitInstance
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpStepOne : AppCompatActivity() {
 
-    lateinit var selectAccountType: Button
-    lateinit var selectedAccountType: TextView
-    lateinit var signupbtn: Button
-    lateinit var Name: EditText
-    lateinit var Email: EditText
-    lateinit var Password: EditText
-    lateinit var NameLayout: TextInputLayout
-    lateinit var EmailLayout: TextInputLayout
-    lateinit var PasswordLayout: TextInputLayout
+    private lateinit var selectAccountType: Button
+    private lateinit var selectedAccountType: TextView
+    private lateinit var signupbtn: Button
+    private lateinit var Name: EditText
+    private lateinit var Email: EditText
+    private lateinit var Password: EditText
+    private lateinit var NameLayout: TextInputLayout
+    private lateinit var EmailLayout: TextInputLayout
+    private lateinit var PasswordLayout: TextInputLayout
 
-    var accountType: String? = null
+    private var accountType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +63,8 @@ class SignUpStepOne : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Choose Account Type")
         builder.setItems(accountTypes) { _, which ->
-            accountType = accountTypes[which]
-            selectedAccountType.text = "Selected Account Type: $accountType"
+            accountType = if (which == 0) "Client" else "Freelancer"
+            selectedAccountType.text = "Selected Account Type: ${accountTypes[which]}"
         }
         builder.show()
     }
@@ -129,12 +130,14 @@ class SignUpStepOne : AppCompatActivity() {
             username = Name.text.toString(),
             email = Email.text.toString(),
             password = Password.text.toString(),
-            id = 0, // ID will be generated on the server or in the mock
-            accounttype = accountType ?: "regular"
+            accountType = accountType ?: "Client"
         )
 
-        // Call the mock API
-        RetrofitInstance.apiService.createUser(user).enqueue(object : Callback<User> {
+        val gson = Gson()
+        val jsonBody = gson.toJson(user)
+        Log.d("RequestBody", jsonBody) // Log the request body for debugging
+
+        RetrofitInstance.apiService.registerUser(user).enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     Snackbar.make(
@@ -142,12 +145,16 @@ class SignUpStepOne : AppCompatActivity() {
                         "Account Created: ${response.body()?.username}",
                         Snackbar.LENGTH_LONG
                     ).show()
-                    // Navigate to LoginActivity
                     val intent = Intent(this@SignUpStepOne, LoginActivity::class.java)
                     startActivity(intent)
-                    finish() // Optionally close SignUpStepOne to prevent going back to it
+                    finish()
                 } else {
-                    Snackbar.make(findViewById(R.id.root), "Failed to create account", Snackbar.LENGTH_LONG).show()
+                    val error = response.errorBody()?.string() ?: "Unknown error"
+                    Snackbar.make(
+                        findViewById(R.id.root),
+                        "Failed to create account: $error",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
 
@@ -155,5 +162,4 @@ class SignUpStepOne : AppCompatActivity() {
                 Snackbar.make(findViewById(R.id.root), "Error: ${t.message}", Snackbar.LENGTH_LONG).show()
             }
         })
-    }
-}
+    }}

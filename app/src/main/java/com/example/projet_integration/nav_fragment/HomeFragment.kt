@@ -128,7 +128,7 @@ class HomeFragment : Fragment() {
                 com.example.projet_integration.models.ServiceRequest(
                     description = description,
                     status = status,
-                    clientId = 10,  // Replace with actual client ID (should be an integer)
+                    clientId = 10.toString(),  // Replace with actual client ID (should be an integer)
                     paymentStatus = "Unpaid"
                 )
             )
@@ -155,11 +155,14 @@ class HomeFragment : Fragment() {
                     Toast.makeText(context, "Service posted successfully!", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(
+
                         context,
                         "Failed to post service: ${response.message()}",
                         Toast.LENGTH_SHORT
                     ).show()
                     // Log the error response
+                    Log.d("ServiceRequest", "Response: ${response.body()}")
+
                     Log.e("ServiceRequest", "Error: ${response.errorBody()?.string()}")
                 }
             }

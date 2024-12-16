@@ -17,9 +17,9 @@
         android:theme="@style/Theme.NavigationDrawerBottomNavigationBar"
         tools:targetApi="31">
 
-        <!-- MainActivity as the launcher activity -->
+        <!-- LoginActivity as the launcher activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.NavigationDrawerBottomNavigationBar.NoActionBar">
             <intent-filter>
@@ -28,10 +28,14 @@
             </intent-filter>
         </activity>
 
+        <!-- MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.NavigationDrawerBottomNavigationBar.NoActionBar" />
+
         <!-- Other Activities -->
         <activity android:name=".SignUpStepOne" android:exported="false" />
-        <activity android:name=".LoginActivity" android:exported="true"
-            android:theme="@style/Theme.NavigationDrawerBottomNavigationBar.NoActionBar" />
     </application>
 
 </manifest>

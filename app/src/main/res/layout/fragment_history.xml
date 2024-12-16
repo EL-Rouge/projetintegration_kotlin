@@ -5,13 +5,35 @@
     android:layout_height="match_parent"
     tools:context=".bottom_fragment.HistoryFragment">
 
-    <TextView
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="History"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@color/backgroundColor"/>
+        android:background="@android:color/white">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:text="Your Service Requests"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <!-- RecyclerView to display the list of service requests -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/service_requests_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/page_title"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+    </RelativeLayout>
+
 
 </FrameLayout>

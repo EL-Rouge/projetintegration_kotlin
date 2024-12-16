@@ -1,9 +1,8 @@
-package com.example.projet_integration.models
+    package com.example.projet_integration.models
 
-class User (
-    val username:String,
-    val email :String,
-    val password : String,
-    val id :Long,
-    val accounttype: String
-)
+    data class User(
+        val username: String,
+        val password: String,
+        val email: String,
+        val accountType: String // e.g., "client" or "freelancer"
+    )

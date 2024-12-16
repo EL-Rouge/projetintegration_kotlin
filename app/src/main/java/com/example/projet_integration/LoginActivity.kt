@@ -5,7 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.projet_integration.models.LoginRequest
+import com.example.projet_integration.models.LoginResponse
+import com.example.projet_integration.network.RetrofitInstance
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login) // Reference to your XML file
 
-        // Initializing views
+        // Initialize views
         emailEditText = findViewById(R.id.email)
         passwordEditText = findViewById(R.id.password)
         loginButton = findViewById(R.id.loginButton)
@@ -28,34 +34,19 @@ class LoginActivity : AppCompatActivity() {
         signUpButton = findViewById(R.id.signup)
         rootLayout = findViewById(R.id.root)
 
-
-
-        // Set Login Button Click Listener
+        // Login button click listener
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
 
             if (validateForm(email, password)) {
-                if (mockApiCall(email, password)) {
-                    Snackbar.make(rootLayout, "Login successful!", Snackbar.LENGTH_SHORT).show()
-
-                    // Navigate to the desired activity (e.g., DashboardActivity or ListActivity)
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-
-                    // Optional: Close the current activity so user can't navigate back with the back button
-                    finish()
-                } else {
-                    showError("Invalid email or password")
-                }
+                loginUser(email, password)
             } else {
                 showError("Please fill in all fields")
             }
         }
 
-
-
-        // Sign-Up Button Click Listener
+        // Sign-Up button click listener
         signUpButton.setOnClickListener {
             val intent = Intent(this, SignUpStepOne::class.java)
             startActivity(intent)
@@ -71,14 +62,33 @@ class LoginActivity : AppCompatActivity() {
         errorTextView.visibility = View.VISIBLE
     }
 
-    private fun navigateToDashboard() {
-        // Intent to navigate to dashboard
-        Toast.makeText(this, "Navigating to Dashboard...", Toast.LENGTH_SHORT).show()
-    }
+    private fun loginUser(email: String, password: String) {
+        // Show a loading indicator (optional)
+        Snackbar.make(rootLayout, "Logging in...", Snackbar.LENGTH_SHORT).show()
 
-    private fun mockApiCall(email: String, password: String): Boolean {
-        // Simulate a login with dummy credentials
-        return email == "haider@gmail.com" && password == "haider"
-    }
+        // Create the login request object
+        val loginRequest = LoginRequest(email, password)
 
+        // Make the API call
+        RetrofitInstance.apiService.loginUser(loginRequest).enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    Snackbar.make(rootLayout, "Login successful!", Snackbar.LENGTH_SHORT).show()
+
+                    // Navigate to MainActivity
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+
+                    // Finish the login activity
+                    finish()
+                } else {
+                    showError("Login failed. Please check your email and password.")
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                showError("Error: ${t.message}")
+            }
+        })
+    }
 }
