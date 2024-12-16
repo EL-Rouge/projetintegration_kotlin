@@ -1,4 +1,4 @@
-package com.example.projet_integration
+package com.example.projet_integration.nav_fragment
 
 import android.app.AlertDialog
 import android.content.Context
@@ -12,6 +12,11 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
+import com.example.projet_integration.CartFragment
+import com.example.projet_integration.CategoryFragment
+import com.example.projet_integration.HistoryFragment
+import com.example.projet_integration.R
+import com.example.projet_integration.bottom_fragment.ServiceRequest
 import com.example.projet_integration.network.RetrofitInstance
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton

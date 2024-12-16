@@ -3,8 +3,6 @@ package com.example.projet_integration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.projet_integration.nav_fragment.HomeFragment
 //import com.coding.meet.navigationdrawerbottomnavigationbar.nav_fragment.HomeFragment
 //import com.coding.meet.navigationdrawerbottomnavigationbar.nav_fragment.ProfileFragment
 //import com.coding.meet.navigationdrawerbottomnavigationbar.nav_fragment.SettingFragment

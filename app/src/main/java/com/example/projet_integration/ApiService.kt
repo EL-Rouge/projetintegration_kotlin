@@ -22,7 +22,7 @@ interface ApiService {
     @GET("/api/service-requests")
     fun getAllServices(): Call<List<ServiceRequest>>
 
-    // Get a service request by ID
+    // Fetch a service request by ID
     @GET("/api/service-requests/{id}")
     fun getServiceById(@Path("id") id: Int): Call<ServiceRequest>
 
