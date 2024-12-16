@@ -26,6 +26,10 @@ interface ApiService {
     @GET("/api/service-requests/{id}")
     fun getServiceById(@Path("id") id: Int): Call<ServiceRequest>
 
+    @GET("/api/service-requests")
+    fun getServicesByClientId(@Query("clientId") clientId: String): Call<List<ServiceRequest>>
+
+
     // Create a new service request
     @POST("/api/service-requests")
     fun createService(@Body serviceRequest: ServiceRequest): Call<ServiceRequest>

@@ -1,39 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".bottom_fragment.HistoryFragment">
 
-        <RelativeLayout
+    <!-- Main container -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:orientation="vertical">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/page_title"
+        <!-- ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"
-            android:text="Your Service Requests"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-        <!-- RecyclerView to display the list of service requests -->
+        <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/service_requests_list"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/page_title"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:clipToPadding="false"
-            android:scrollbars="vertical" />
-
-    </RelativeLayout>
-
-
+            android:padding="16dp" />
+    </LinearLayout>
 </FrameLayout>

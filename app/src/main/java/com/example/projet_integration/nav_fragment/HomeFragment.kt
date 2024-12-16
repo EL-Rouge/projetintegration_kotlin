@@ -1,6 +1,7 @@
 package com.example.projet_integration
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,22 +13,27 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.projet_integration.network.RetrofitInstance
-//import com.coding.meet.navigationdrawerbottomnavigationbar.R
-//import com.coding.meet.navigationdrawerbottomnavigationbar.bottom_fragment.CartFragment
-//import com.coding.meet.navigationdrawerbottomnavigationbar.bottom_fragment.CategoryFragment
-//import com.coding.meet.navigationdrawerbottomnavigationbar.bottom_fragment.HistoryFragment
-//import com.coding.meet.navigationdrawerbottomnavigationbar.bottom_fragment.NotificationFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-
 class HomeFragment : Fragment() {
+
+    private var clientId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        // Retrieve the client ID from SharedPreferences
+        val sharedPref = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        clientId = sharedPref.getString("CLIENT_ID", null)
+        Log.d("HomeFragment", "Retrieved Client ID: $clientId")
+
+        if (clientId.isNullOrEmpty()) {
+            Toast.makeText(context, "Client ID not found. Please log in again.", Toast.LENGTH_SHORT).show()
+        }
 
         // Handle bottom navigation
         val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -37,27 +43,21 @@ class HomeFragment : Fragment() {
                     replaceFragment(CategoryFragment())
                     activity?.title = "Category"
                 }
-
                 R.id.bottom_history -> {
                     replaceFragment(HistoryFragment())
                     activity?.title = "History"
                 }
-
                 R.id.bottom_servicerequest -> {
                     replaceFragment(ServiceRequest())
                     activity?.title = "Notification"
                 }
-
                 R.id.bottom_cart -> {
                     replaceFragment(CartFragment())
                     activity?.title = "Cart"
                 }
             }
             true
-
-
         }
-
 
         // Default fragment
         replaceFragment(CategoryFragment())
@@ -95,10 +95,6 @@ class HomeFragment : Fragment() {
         val serviceStatusSpinner = dialogView.findViewById<Spinner>(R.id.spinnerServiceStatus)
         val serviceDescriptionEditText = dialogView.findViewById<EditText>(R.id.etServiceDescription)
         val servicePriceEditText = dialogView.findViewById<EditText>(R.id.etServicePrice)
-        val clientInfoEditText = dialogView.findViewById<EditText>(R.id.etClientInfo)
-
-        // Set the client info (e.g., auto-filled client ID)
-        clientInfoEditText.setText("10") // Ensure this is a valid integer
 
         // Populate the Spinner with options
         val statusOptions = arrayOf("Pending", "In Progress", "Completed")
@@ -123,12 +119,17 @@ class HomeFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            if (clientId.isNullOrEmpty()) {
+                Toast.makeText(context, "Client ID is missing. Please log in again.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // Post the service request
             postServiceRequest(
                 com.example.projet_integration.models.ServiceRequest(
+                    clientId = clientId!!,  // Use the retrieved client ID
                     description = description,
                     status = status,
-                    clientId = 10.toString(),  // Replace with actual client ID (should be an integer)
                     paymentStatus = "Unpaid"
                 )
             )
@@ -155,14 +156,10 @@ class HomeFragment : Fragment() {
                     Toast.makeText(context, "Service posted successfully!", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(
-
                         context,
                         "Failed to post service: ${response.message()}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    // Log the error response
-                    Log.d("ServiceRequest", "Response: ${response.body()}")
-
                     Log.e("ServiceRequest", "Error: ${response.errorBody()?.string()}")
                 }
             }
@@ -175,4 +172,5 @@ class HomeFragment : Fragment() {
                 Log.e("ServiceRequest", "Error: ${t.message}")
             }
         })
-    }}
+    }
+}

@@ -1,8 +1,11 @@
-    package com.example.projet_integration.models
+package com.example.projet_integration.models
 
-    data class User(
-        val username: String,
-        val password: String,
-        val email: String,
-        val accountType: String // e.g., "client" or "freelancer"
-    )
+import com.google.gson.annotations.SerializedName
+
+data class User(
+    @SerializedName("_id") val userId: String = "",
+    val username: String,
+    val password: String,
+    val email: String,
+    val accountType: String
+)

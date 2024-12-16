@@ -1,7 +1,9 @@
 package com.example.projet_integration
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +47,9 @@ class LoginActivity : AppCompatActivity() {
                 showError("Please fill in all fields")
             }
         }
+        val sharedPref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val savedClientId = sharedPref.getString("CLIENT_ID", null)
+        Log.d("HistoryFragment", "Retrieved Client ID: $savedClientId")
 
         // Sign-Up button click listener
         signUpButton.setOnClickListener {
@@ -53,42 +58,51 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // Save the user ID in SharedPreferences
+    private fun saveClientId(context: Context, clientId: String) {
+        val sharedPref = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString("CLIENT_ID", clientId)
+            apply()
+            Log.d("LoginActivity", "User ID saved: $clientId")
+        }
+    }
+
+
+    // Form validation
     private fun validateForm(email: String, password: String): Boolean {
         return email.isNotEmpty() && password.isNotEmpty()
     }
 
+    // Show error message
     private fun showError(message: String) {
         errorTextView.text = message
         errorTextView.visibility = View.VISIBLE
     }
 
+    // Login user
+    // Login user
     private fun loginUser(email: String, password: String) {
-        // Show a loading indicator (optional)
-        Snackbar.make(rootLayout, "Logging in...", Snackbar.LENGTH_SHORT).show()
-
-        // Create the login request object
-        val loginRequest = LoginRequest(email, password)
-
-        // Make the API call
-        RetrofitInstance.apiService.loginUser(loginRequest).enqueue(object : Callback<LoginResponse> {
+        val loginData = LoginRequest(email, password)
+        RetrofitInstance.apiService.loginUser(loginData).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful && response.body() != null) {
-                    Snackbar.make(rootLayout, "Login successful!", Snackbar.LENGTH_SHORT).show()
-
-                    // Navigate to MainActivity
+                if (response.isSuccessful) {
+                    val loginResponse = response.body()
+                    loginResponse?.user?.userId?.let {
+                        Log.d("LoginActivity", "Received User ID: $it")
+                        saveClientId(this@LoginActivity, it)
+                    } ?: Log.e("LoginActivity", "User ID is null")
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
-
-                    // Finish the login activity
-                    finish()
                 } else {
-                    showError("Login failed. Please check your email and password.")
+                    Log.e("LoginActivity", "Login failed: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                showError("Error: ${t.message}")
+                Log.e("LoginActivity", "Login error: ${t.message}")
             }
         })
     }
+
 }

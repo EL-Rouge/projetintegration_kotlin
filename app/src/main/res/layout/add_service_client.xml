@@ -29,25 +29,6 @@
             android:background="@drawable/edittext_border" />
     </LinearLayout>
 
-    <!-- Client Information (Read-Only) -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Client Information:"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:paddingBottom="4dp" />
-
-    <EditText
-        android:id="@+id/etClientInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Client ID (Auto-filled)"
-        android:background="@drawable/edittext_border"
-        android:layout_marginBottom="16dp"
-        android:focusable="false"
-        android:clickable="false" />
-
     <!-- Service Description -->
     <TextView
         android:layout_width="match_parent"

@@ -1,4 +1,7 @@
 package com.example.projet_integration.models
+
+import com.google.gson.annotations.SerializedName
+
 data class ServiceRequest(
     val description: String,
     val status: String = "Pending",  // Default value for status
