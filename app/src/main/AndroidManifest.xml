@@ -34,6 +34,9 @@
             android:exported="true"
             android:theme="@style/Theme.NavigationDrawerBottomNavigationBar.NoActionBar" />
 
+        <!-- ChatActivity (Make sure it's declared) -->
+        <activity android:name=".ChatActivity" android:exported="true" />
+
         <!-- Other Activities -->
         <activity android:name=".SignUpStepOne" android:exported="false" />
     </application>

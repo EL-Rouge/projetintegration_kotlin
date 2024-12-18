@@ -1,10 +1,12 @@
 package com.example.projet_integration
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,7 @@ class ServiceRequest : Fragment() {
     private lateinit var serviceRequestAdapter: ServiceRequestAdapter
     private val serviceRequestList = mutableListOf<ServiceRequest>()
 
+
     // Inflate the fragment layout and initialize views
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +32,7 @@ class ServiceRequest : Fragment() {
     ): View? {
         // Inflate the fragment's layout
         val view = inflater.inflate(R.layout.fragment_list_service_request, container, false)
+
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.service_requests_recycler_view)
@@ -42,6 +46,8 @@ class ServiceRequest : Fragment() {
         fetchServiceRequests()
 
         return view
+
+
     }
 
     // Fetch data from your backend using Retrofit

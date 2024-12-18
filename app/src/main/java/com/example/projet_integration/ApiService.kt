@@ -1,5 +1,7 @@
 package com.example.projet_integration
 
+import com.example.projet_integration.models.Chat
+import com.example.projet_integration.models.ChatRequest
 import com.example.projet_integration.models.LoginRequest
 import com.example.projet_integration.models.LoginResponse
 import com.example.projet_integration.models.ServiceRequest
@@ -41,5 +43,15 @@ interface ApiService {
     // Update a service request by ID
     @PUT("/api/service-requests/{id}")
     fun updateServiceRequest(@Path("id") id: String, @Body updates: Map<String, String>): Call<ServiceRequest>
+
+    @GET("/api/chat")
+    fun getChat(
+        @Query("clientId") clientId: String,
+        @Query("freelancerId") freelancerId: String
+    ): Call<Chat>
+
+
+    @POST("/api/chats")
+    fun createChat(@Body chatRequest: ChatRequest): Call<Chat>
 }
 

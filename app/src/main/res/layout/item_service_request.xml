@@ -59,5 +59,15 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp" />
 
+        <Button
+            android:id="@+id/button_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white" />
+
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

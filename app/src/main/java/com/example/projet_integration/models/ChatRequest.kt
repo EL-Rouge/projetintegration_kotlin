@@ -1,4 +1,7 @@
 package com.example.projet_integration.models
 
-class ChatRequest {
-}
+data class ChatRequest(
+    val freelancerId: String,
+    val clientId: String,
+    val messages: List<Message>
+)
