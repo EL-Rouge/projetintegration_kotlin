@@ -34,4 +34,12 @@ interface ApiService {
     @POST("/api/service-requests")
     fun createService(@Body serviceRequest: ServiceRequest): Call<ServiceRequest>
 
+
+    @DELETE("/api/service-requests/{id}")
+    fun deleteServiceRequest(@Path("id") id: String): Call<Void>
+
+    // Update a service request by ID
+    @PUT("/api/service-requests/{id}")
+    fun updateServiceRequest(@Path("id") id: String, @Body updates: Map<String, String>): Call<ServiceRequest>
 }
+

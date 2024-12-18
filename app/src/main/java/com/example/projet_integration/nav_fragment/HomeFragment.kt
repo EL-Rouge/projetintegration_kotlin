@@ -15,6 +15,8 @@ import android.widget.Toast
 import com.example.projet_integration.network.RetrofitInstance
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.bson.types.ObjectId
+
 
 class HomeFragment : Fragment() {
 
@@ -124,14 +126,19 @@ class HomeFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            val serviceRequestId = ObjectId().toString()
+
+
             // Post the service request
             postServiceRequest(
                 com.example.projet_integration.models.ServiceRequest(
+                    id = serviceRequestId,
                     clientId = clientId!!,  // Use the retrieved client ID
                     description = description,
                     status = status,
                     paymentStatus = "Unpaid"
                 )
+
             )
 
             // Dismiss the dialog

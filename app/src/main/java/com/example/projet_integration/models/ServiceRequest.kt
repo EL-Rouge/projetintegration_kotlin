@@ -3,6 +3,7 @@ package com.example.projet_integration.models
 import com.google.gson.annotations.SerializedName
 
 data class ServiceRequest(
+    @SerializedName("_id") val id: String,  // Required field for MongoDB
     val description: String,
     val status: String = "Pending",  // Default value for status
     val paymentStatus: String = "Unpaid",  // Default value for paymentStatus
