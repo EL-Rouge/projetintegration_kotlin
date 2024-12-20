@@ -10,7 +10,9 @@ data class ServiceRequest(
     val createdAt: String = "",
     val updatedAt: String = "",
     val clientId: String?, // Nullable because it might be null
-    val freelancerId: String?=null
+    val freelancerId: String?=null,
+    var exported: Boolean = false  // New field with default value
+
 )
 
 

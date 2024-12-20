@@ -13,7 +13,7 @@ import java.util.*
 
 class ChatAdapter(
     private val context: Context,
-    private val messages: List<Message>,
+    private val messages: MutableList<Message>, // Use mutableList for easy updating
     private val currentUserId: String
 ) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
@@ -38,13 +38,19 @@ class ChatAdapter(
         return ChatViewHolder(view)
     }
 
-    // Bind message content and timestamp to the views
+    // Bind message content, sender's name, and timestamp to the views
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val message = messages[position]
         holder.messageContent.text = message.content
-
-        // Format the timestamp into a readable format
         holder.messageTimestamp.text = formatTimestamp(message.timestamp)
+
+        // Set freelancer's name for received messages
+        if (message.sender != currentUserId) {
+            holder.messageSender.text = "Freelancer" // Set sender's name
+            holder.messageSender.visibility = View.VISIBLE
+        } else {
+            holder.messageSender.visibility = View.GONE // Hide for sent messages
+        }
     }
 
     // Return the total number of messages
@@ -54,6 +60,7 @@ class ChatAdapter(
     inner class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val messageContent: TextView = itemView.findViewById(R.id.message_content)
         val messageTimestamp: TextView = itemView.findViewById(R.id.message_timestamp)
+        val messageSender: TextView = itemView.findViewById(R.id.message_sender)  // TextView for sender's name
     }
 
     // Function to format timestamp into a more user-friendly format
@@ -69,3 +76,5 @@ class ChatAdapter(
         }
     }
 }
+
+
