@@ -1,7 +1,10 @@
 package com.example.projet_integration.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ServiceRequest(
     @SerializedName("_id") val id: String,  // Required field for MongoDB
     val description: String,
@@ -10,9 +13,5 @@ data class ServiceRequest(
     val createdAt: String = "",
     val updatedAt: String = "",
     val clientId: String?, // Nullable because it might be null
-    val freelancerId: String?=null
-)
-
-
-
-
+    val freelancerId: String? = null
+) : Parcelable

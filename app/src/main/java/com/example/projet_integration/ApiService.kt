@@ -12,6 +12,11 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    // Admin login
+    @POST("/api/admin/login")
+    fun loginAdmin(@Body loginRequest: LoginRequest): Call<LoginResponse>
+
+
     // User registration
     @POST("/api/users/register")
     fun registerUser(@Body user: User): Call<User>
@@ -53,5 +58,36 @@ interface ApiService {
 
     @POST("/api/chats")
     fun createChat(@Body chatRequest: ChatRequest): Call<Chat>
+
+    @GET("/api/admin/users")
+    fun getAllUsers(): Call<List<User>>
+
+    @GET("/api/users/{id}")
+    fun getUserById(@Path("id") userId: String): Call<User>
+
+    @POST("/api/admin/users")
+    fun createUser(user: User): Call<User>
+
+    @PUT("/api/admin/users/{id}")
+    fun updateUser(@Path("id") userId: String, @Body user: User): Call<User>
+
+
+    @DELETE("/api/admin/users/{id}")
+    fun deleteUser(@Path("id") userId: String): Call<Void>
+
+    @GET("/api/admin/service-requests")
+    fun getAllServiceRequests(): Call<List<ServiceRequest>>
+
+
+
+    @PUT("/api/admin/service-requests/{id}")
+    fun updateServiceRequest(@Path("id") id: String, @Body serviceRequest: ServiceRequest): Call<Void>
+
+
+
+
+    @DELETE("/api/admin/service-requests/{id}")
+    fun deleteServiceRequest(@Path("id") id: Int): Call<Void>
+
 }
 

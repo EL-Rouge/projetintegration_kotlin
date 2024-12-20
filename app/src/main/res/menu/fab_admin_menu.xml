@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Other menu items -->
+
+    <item
+        android:id="@+id/bottom_user_manipulation"
+        android:icon="@drawable/ic_user"
+        android:title="User Management" />
+
+
+
+    <item
+        android:id="@+id/bottom_service_requests"
+        android:icon="@drawable/ic_service_requests"
+    android:title="Service Requests" />
+</menu>

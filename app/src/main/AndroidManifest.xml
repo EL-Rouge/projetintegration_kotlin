@@ -39,6 +39,13 @@
 
         <!-- Other Activities -->
         <activity android:name=".SignUpStepOne" android:exported="false" />
+
+        <!-- Declare AdminDashboardActivity -->
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="true"
+            android:theme="@style/Theme.NavigationDrawerBottomNavigationBar.NoActionBar"/>
+
     </application>
 
 </manifest>

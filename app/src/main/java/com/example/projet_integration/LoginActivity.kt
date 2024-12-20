@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.projet_integration.models.LoginRequest
 import com.example.projet_integration.models.LoginResponse
 import com.example.projet_integration.network.RetrofitInstance
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,9 +46,6 @@ class LoginActivity : AppCompatActivity() {
                 showError("Please fill in all fields")
             }
         }
-        val sharedPref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val savedClientId = sharedPref.getString("CLIENT_ID", null)
-        Log.d("HistoryFragment", "Retrieved Client ID: $savedClientId")
 
         // Sign-Up button click listener
         signUpButton.setOnClickListener {
@@ -68,7 +64,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
     // Form validation
     private fun validateForm(email: String, password: String): Boolean {
         return email.isNotEmpty() && password.isNotEmpty()
@@ -81,28 +76,36 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // Login user
-    // Login user
     private fun loginUser(email: String, password: String) {
-        val loginData = LoginRequest(email, password)
-        RetrofitInstance.apiService.loginUser(loginData).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    val loginResponse = response.body()
-                    loginResponse?.user?.userId?.let {
-                        Log.d("LoginActivity", "Received User ID: $it")
-                        saveClientId(this@LoginActivity, it)
-                    } ?: Log.e("LoginActivity", "User ID is null")
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.e("LoginActivity", "Login failed: ${response.errorBody()?.string()}")
+        // Check if the user is trying to log in as an admin
+        if (email == "admin@admin.com" && password == "adminpassword") {
+            // If the credentials match the admin, proceed to the admin screen
+            val intent = Intent(this@LoginActivity, AdminDashboardActivity::class.java) // Admin activity
+            startActivity(intent)
+        } else {
+            // Proceed with the network login request for regular users
+            val loginData = LoginRequest(email, password)
+            RetrofitInstance.apiService.loginUser(loginData).enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    if (response.isSuccessful) {
+                        val loginResponse = response.body()
+                        loginResponse?.user?.userId?.let {
+                            Log.d("LoginActivity", "Received User ID: $it")
+                            saveClientId(this@LoginActivity, it)
+                        } ?: Log.e("LoginActivity", "User ID is null")
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Log.e("LoginActivity", "Login failed: ${response.errorBody()?.string()}")
+                        showError("Invalid credentials")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("LoginActivity", "Login error: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Log.e("LoginActivity", "Login error: ${t.message}")
+                    showError("An error occurred during login")
+                }
+            })
+        }
     }
-
 }

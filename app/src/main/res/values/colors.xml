@@ -33,6 +33,9 @@
     <color name="backgroundColor">#FF5722</color>
     <color name="mainColor">#FF5722</color>
     <color name="red">#FF5722</color>
+    <color name="colorPrimary">#6200EE</color> <!-- Purple color, you can adjust this to your desired shade -->
+    <color name="colorError">#D32F2F</color>
+    <color name="colorAccent">#03DAC5</color>
 
 
 </resources>
